@@ -1,0 +1,55 @@
+# 链表
+
+## 1.找出两个链表的交点
+
+160. 相交链表
+https://leetcode.cn/problems/intersection-of-two-linked-lists/submissions/
+
+
+### 思路1
+遍历获得长度，长链表指针向后移动差值个节点，逐个判断是否相同至结束
+
+`
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+
+        if not headA or not headB:
+            return None 
+        len1 = 0
+        len2 = 0
+        tmp_node_1 = headA
+        tmp_node_2 = headB
+        while tmp_node_1.next is not None:
+            tmp_node_1 = tmp_node_1.next
+            len1 += 1
+        while tmp_node_2.next is not None:
+            tmp_node_2 = tmp_node_2.next
+            len2 += 1
+        
+        tmp_node_1 = headA
+        tmp_node_2 = headB
+        if len1 > len2:
+            for i in range(len1-len2):
+                tmp_node_1 = tmp_node_1.next
+        elif len2 > len1:
+            for i in range(len2-len1):
+                tmp_node_2 = tmp_node_2.next
+        
+        while tmp_node_1 and tmp_node_2:
+            if tmp_node_1 == tmp_node_2:
+                return tmp_node_1
+            else:
+                tmp_node_1 = tmp_node_1.next
+                tmp_node_2 = tmp_node_2.next
+        return None
+`
+### 思路2
+
+大佬思路：https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E9%93%BE%E8%A1%A8.md
+
